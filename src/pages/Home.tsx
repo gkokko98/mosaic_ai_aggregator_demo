@@ -1,7 +1,8 @@
 import { apps, featuredApps } from "@/data/apps";
 import { categories } from "@/data/categories";
 import { news } from "@/data/news";
-import { FeaturedAppCard, AppTile } from "@/components/AppCard";
+import { FeaturedAppCard } from "@/components/FeaturedAppCard";
+import { AppTile } from "@/components/AppTile";
 import { NewsCard } from "@/components/NewsCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { useCarouselIndex } from "@/hooks/useCarouselIndex";
