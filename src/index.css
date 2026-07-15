@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/500.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+
+@theme {
+  --font-sans: "Sora", system-ui, sans-serif;
+
+  /* mosAIc palette — approximated from Figma screenshots, refine with exact hex values from Figma Inspect */
+  --color-app-bg: #0a1420;
+  --color-surface: #122333;
+  --color-surface-alt: #16293b;
+  --color-accent: #2dd6e6;
+  --color-accent-muted: rgba(45, 214, 230, 0.16);
+  --color-star: #f5a623;
+  --color-text-primary: #f5f7fa;
+  --color-text-secondary: #8ea0b3;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-app-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
