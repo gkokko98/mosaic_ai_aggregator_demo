@@ -1,11 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useMatch } from "react-router-dom";
 import { Header } from "./Header";
 import { BottomNav } from "./BottomNav";
 
 export function AppLayout() {
+  const isServiceDetails = useMatch("/app/:id");
+
   return (
     <div className="mx-auto flex min-h-svh max-w-md flex-col bg-app-bg">
-      <Header />
+      {!isServiceDetails && <Header />}
       <main className="flex-1 overflow-y-auto px-4 pb-6">
         <Outlet />
       </main>

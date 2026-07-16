@@ -12,6 +12,9 @@ export const apps: App[] = [
     iconBg: "#f5c518",
     price: "€0.99/day",
     rating: 5,
+    ratingsCount: 1042,
+    description:
+      "Chat with advanced AI models, generate content, and build custom workflows — all from one sleek assistant that adapts to how you work and create every day.",
     featured: true,
   },
   {
@@ -24,6 +27,9 @@ export const apps: App[] = [
     iconBg: "linear-gradient(135deg, #f472b6, #60a5fa)",
     price: "€2.99/week",
     rating: 4,
+    ratingsCount: 224,
+    description:
+      "Your AI-powered fitness companion. Choose your trainer, follow personalised workout plans, fuel your body with healthy recipes, and find your zen with yoga all in one app.",
     featured: true,
   },
   {
@@ -36,6 +42,9 @@ export const apps: App[] = [
     iconBg: "#38bdf8",
     price: "€1.49/week",
     rating: 5,
+    ratingsCount: 389,
+    description:
+      "Gentle AI-narrated bedtime stories crafted for little dreamers, with calming soundscapes and nightly routines that help kids drift off happy and relaxed.",
     featured: true,
   },
   {
@@ -48,6 +57,9 @@ export const apps: App[] = [
     iconBg: "#4d7c0f",
     price: "€4.99/month",
     rating: 4.5,
+    ratingsCount: 567,
+    description:
+      "Scan any meal with your camera and get instant nutrition breakdowns, smart recipe swaps, and personalised tips to help you eat better every single day.",
     featured: true,
   },
   {
@@ -60,6 +72,9 @@ export const apps: App[] = [
     iconBg: "linear-gradient(135deg, #a855f7, #ec4899)",
     price: "€1.49/day",
     rating: 3.5,
+    ratingsCount: 134,
+    description:
+      "Turn simple prompts into stunning AI-generated art, illustrations, and visuals in seconds — perfect for social posts, moodboards, and creative projects.",
   },
   {
     id: "uwisely",
@@ -71,6 +86,9 @@ export const apps: App[] = [
     iconBg: "#2563eb",
     price: "€3.99/month",
     rating: 3.5,
+    ratingsCount: 98,
+    description:
+      "Learn any language the smart way with adaptive AI lessons, real conversation practice, and bite-sized daily drills that fit whenever you have a spare minute.",
   },
   {
     id: "mygrowth",
@@ -82,6 +100,9 @@ export const apps: App[] = [
     iconBg: "#f8fafc",
     price: "€1.99/week",
     rating: 5,
+    ratingsCount: 621,
+    description:
+      "Personal growth powered by AI coaching — set goals, track habits, and get daily guidance tailored to your mindset, routines, and long-term ambitions.",
   },
   {
     id: "uplingo",
@@ -93,6 +114,9 @@ export const apps: App[] = [
     iconBg: "#0ea5e9",
     price: "€2.99/week",
     rating: 4,
+    ratingsCount: 275,
+    description:
+      "Master new skills in bite-sized lessons, powered by adaptive AI that adjusts pace and difficulty to how you learn best, one quick session at a time.",
   },
 ];
 

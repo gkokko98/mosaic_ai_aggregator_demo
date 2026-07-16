@@ -15,6 +15,8 @@ export interface App {
   iconBg: string;
   price: string;
   rating: number;
+  ratingsCount: number;
+  description: string;
   featured?: boolean;
 }
 
