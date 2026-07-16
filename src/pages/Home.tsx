@@ -54,7 +54,7 @@ export function Home() {
             <SectionHeader title={category.label} />
             <div className="flex gap-3 overflow-x-auto scrollbar-none pb-1">
               {categoryApps.map((app) => (
-                <AppTile key={app.id} app={app} />
+                <AppTile key={app.id} app={app} from="Home" />
               ))}
             </div>
           </section>

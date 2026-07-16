@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { apps } from "@/data/apps";
 import { categories } from "@/data/categories";
 import { RatingStars } from "@/components/RatingStars";
@@ -7,6 +7,7 @@ import { ChevronLeftIcon } from "@/components/icons";
 export function ServiceDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const app = apps.find((a) => a.id === id);
 
   if (!app) {
@@ -14,6 +15,8 @@ export function ServiceDetails() {
   }
 
   const categoryLabel = categories.find((c) => c.id === app.category)?.label ?? app.category;
+  const from = (location.state as { from?: "Home" | "Explore" } | null)?.from ?? "Explore";
+  const fromPath = from === "Home" ? "/" : "/explore";
 
   return (
     <div className="flex flex-col pb-2">
@@ -32,7 +35,9 @@ export function ServiceDetails() {
       </div>
 
       <nav aria-label="Breadcrumb" className="mt-4 flex items-center gap-1.5 text-xs text-text-secondary">
-        <span>Explore</span>
+        <Link to={fromPath} className="hover:text-text-primary">
+          {from}
+        </Link>
         <span>&gt;</span>
         <span>{categoryLabel}</span>
         <span>&gt;</span>

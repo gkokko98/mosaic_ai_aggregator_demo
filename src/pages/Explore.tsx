@@ -44,7 +44,7 @@ export function Explore() {
       ) : (
         <div className="grid grid-cols-2 gap-3">
           {filteredApps.map((app) => (
-            <AppTile key={app.id} app={app} className="w-full" />
+            <AppTile key={app.id} app={app} className="w-full" from="Explore" />
           ))}
         </div>
       )}
