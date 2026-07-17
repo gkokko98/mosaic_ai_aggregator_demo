@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { apps } from "@/data/apps";
 import { categories } from "@/data/categories";
 import { RatingStars } from "@/components/RatingStars";
+import { SubscriptionConfirmationModal } from "@/components/SubscriptionConfirmationModal";
 import { ChevronLeftIcon } from "@/components/icons";
 
 export function ServiceDetails() {
@@ -9,6 +11,10 @@ export function ServiceDetails() {
   const navigate = useNavigate();
   const location = useLocation();
   const app = apps.find((a) => a.id === id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // TEMPORARY: local-only state, resets on refresh by design (no persistence yet).
+  // Remove this note once MyPlans introduces persisted subscription state.
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   if (!app) {
     return <p className="pt-16 text-center text-sm text-text-secondary">App not found.</p>;
@@ -56,9 +62,12 @@ export function ServiceDetails() {
 
       <button
         type="button"
+        onClick={() => {
+          if (!isSubscribed) setIsModalOpen(true);
+        }}
         className="mt-5 w-full rounded-full bg-accent py-3.5 text-sm font-bold uppercase tracking-wide text-app-bg"
       >
-        Subscribe
+        {isSubscribed ? "Launch" : "Subscribe"}
       </button>
 
       <p className="mt-5 text-center text-sm text-text-secondary">{app.description}</p>
@@ -72,6 +81,17 @@ export function ServiceDetails() {
           ))}
         </div>
       </div>
+
+      <SubscriptionConfirmationModal
+        open={isModalOpen}
+        appName={app.name}
+        price={app.price}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => {
+          setIsSubscribed(true);
+          setIsModalOpen(false);
+        }}
+      />
     </div>
   );
 }
