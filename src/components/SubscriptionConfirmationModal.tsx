@@ -4,6 +4,7 @@ interface SubscriptionConfirmationModalProps {
   open: boolean;
   appName: string;
   price: string;
+  mode?: "subscribe" | "renew";
   onConfirm: () => void;
   onClose: () => void;
 }
@@ -12,6 +13,7 @@ export function SubscriptionConfirmationModal({
   open,
   appName,
   price,
+  mode = "subscribe",
   onConfirm,
   onClose,
 }: SubscriptionConfirmationModalProps) {
@@ -38,8 +40,17 @@ export function SubscriptionConfirmationModal({
         <h2 className="text-xl font-bold text-text-primary">Confirm your plan</h2>
 
         <p className="mt-4 text-sm text-text-secondary">
-          You're about to subscribe to <strong className="text-accent">{appName}</strong> for{" "}
-          <strong className="text-accent">{price}</strong>.
+          {mode === "renew" ? (
+            <>
+              You're about to renew your plan for <strong className="text-accent">{appName}</strong> for{" "}
+              <strong className="text-accent">{price}</strong>.
+            </>
+          ) : (
+            <>
+              You're about to subscribe to <strong className="text-accent">{appName}</strong> for{" "}
+              <strong className="text-accent">{price}</strong>.
+            </>
+          )}
         </p>
 
         <p className="mt-3 text-xs text-text-secondary">

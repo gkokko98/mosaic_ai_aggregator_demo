@@ -16,6 +16,7 @@ export const apps: App[] = [
     description:
       "Chat with advanced AI models, generate content, and build custom workflows — all from one sleek assistant that adapts to how you work and create every day.",
     featured: true,
+    renewalDate: "21 Jul 2026",
   },
   {
     id: "ufitini",
@@ -31,6 +32,7 @@ export const apps: App[] = [
     description:
       "Your AI-powered fitness companion. Choose your trainer, follow personalised workout plans, fuel your body with healthy recipes, and find your zen with yoga all in one app.",
     featured: true,
+    renewalDate: "24 Jul 2026",
   },
   {
     id: "moonkid",
@@ -46,6 +48,7 @@ export const apps: App[] = [
     description:
       "Gentle AI-narrated bedtime stories crafted for little dreamers, with calming soundscapes and nightly routines that help kids drift off happy and relaxed.",
     featured: true,
+    renewalDate: "23 Jul 2026",
   },
   {
     id: "magicbite",
@@ -61,6 +64,7 @@ export const apps: App[] = [
     description:
       "Scan any meal with your camera and get instant nutrition breakdowns, smart recipe swaps, and personalised tips to help you eat better every single day.",
     featured: true,
+    renewalDate: "18 Jun 2026",
   },
   {
     id: "aipix",
@@ -75,6 +79,7 @@ export const apps: App[] = [
     ratingsCount: 134,
     description:
       "Turn simple prompts into stunning AI-generated art, illustrations, and visuals in seconds — perfect for social posts, moodboards, and creative projects.",
+    renewalDate: "19 Jul 2026",
   },
   {
     id: "uwisely",
@@ -89,6 +94,7 @@ export const apps: App[] = [
     ratingsCount: 98,
     description:
       "Learn any language the smart way with adaptive AI lessons, real conversation practice, and bite-sized daily drills that fit whenever you have a spare minute.",
+    renewalDate: "10 Aug 2026",
   },
   {
     id: "mygrowth",
@@ -103,6 +109,7 @@ export const apps: App[] = [
     ratingsCount: 621,
     description:
       "Personal growth powered by AI coaching — set goals, track habits, and get daily guidance tailored to your mindset, routines, and long-term ambitions.",
+    renewalDate: "24 Jul 2026",
   },
   {
     id: "uplingo",
@@ -117,6 +124,7 @@ export const apps: App[] = [
     ratingsCount: 275,
     description:
       "Master new skills in bite-sized lessons, powered by adaptive AI that adjusts pace and difficulty to how you learn best, one quick session at a time.",
+    renewalDate: "25 Jul 2026",
   },
 ];
 

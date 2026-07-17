@@ -4,27 +4,39 @@ import { apps } from "@/data/apps";
 import { categories } from "@/data/categories";
 import { RatingStars } from "@/components/RatingStars";
 import { SubscriptionConfirmationModal } from "@/components/SubscriptionConfirmationModal";
+import { getSubscriptionStatus, useSubscriptions } from "@/context/useSubscriptions";
 import { ChevronLeftIcon } from "@/components/icons";
+
+type From = "Home" | "Explore" | "News" | "MyPlans";
+
+const FROM_PATHS: Record<From, string> = {
+  Home: "/",
+  Explore: "/explore",
+  News: "/news",
+  MyPlans: "/my-plans",
+};
 
 export function ServiceDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const app = apps.find((a) => a.id === id);
+  const { isSubscribed, subscribe } = useSubscriptions();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const state = location.state as { from?: "Home" | "Explore" | "News"; subscribed?: boolean } | null;
-  // TEMPORARY: local-only state, resets on refresh by design (no persistence yet).
-  // Remove this note once MyPlans introduces persisted subscription state.
-  // `subscribed` can arrive pre-set via WideAppCard's own confirm flow, not just this page's.
-  const [isSubscribed, setIsSubscribed] = useState(() => Boolean(state?.subscribed));
 
   if (!app) {
     return <p className="pt-16 text-center text-sm text-text-secondary">App not found.</p>;
   }
 
   const categoryLabel = categories.find((c) => c.id === app.category)?.label ?? app.category;
-  const from = state?.from ?? "Explore";
-  const fromPath = from === "Home" ? "/" : from === "News" ? "/news" : "/explore";
+  const from = (location.state as { from?: From } | null)?.from ?? "Explore";
+  const fromPath = FROM_PATHS[from];
+
+  const status = !isSubscribed(app.id)
+    ? "subscribe"
+    : getSubscriptionStatus(app.id) === "expired"
+      ? "renew"
+      : "launch";
 
   return (
     <div className="flex flex-col pb-2">
@@ -65,11 +77,11 @@ export function ServiceDetails() {
       <button
         type="button"
         onClick={() => {
-          if (!isSubscribed) setIsModalOpen(true);
+          if (status !== "launch") setIsModalOpen(true);
         }}
         className="mt-5 w-full rounded-full bg-accent py-3.5 text-sm font-bold uppercase tracking-wide text-app-bg"
       >
-        {isSubscribed ? "Launch" : "Subscribe"}
+        {status === "subscribe" ? "Subscribe" : status === "renew" ? "Renew" : "Launch"}
       </button>
 
       <p className="mt-5 text-center text-sm text-text-secondary">{app.description}</p>
@@ -88,9 +100,10 @@ export function ServiceDetails() {
         open={isModalOpen}
         appName={app.name}
         price={app.price}
+        mode={status === "renew" ? "renew" : "subscribe"}
         onClose={() => setIsModalOpen(false)}
         onConfirm={() => {
-          setIsSubscribed(true);
+          subscribe(app.id);
           setIsModalOpen(false);
         }}
       />

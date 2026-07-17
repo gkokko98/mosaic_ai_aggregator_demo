@@ -18,6 +18,9 @@ export interface App {
   ratingsCount: number;
   description: string;
   featured?: boolean;
+  // Static display date for MyPlans' "Renews {date}" / "Expired {date}" line —
+  // not a real subscribe timestamp, since there's no backend to record one.
+  renewalDate: string;
 }
 
 export interface NewsItem {
