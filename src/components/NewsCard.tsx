@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { NewsItem } from "@/data/types";
 import { CategoryBadge } from "./CategoryBadge";
 
@@ -8,7 +9,8 @@ interface NewsCardProps {
 
 export function NewsCard({ item, className = "w-56 shrink-0 sm:w-64" }: NewsCardProps) {
   return (
-    <article
+    <Link
+      to={`/news/${item.id}`}
       className={`relative flex h-40 flex-col justify-end overflow-hidden rounded-2xl p-4 ${className}`}
       style={{ backgroundImage: item.image, backgroundSize: "cover" }}
     >
@@ -20,6 +22,6 @@ export function NewsCard({ item, className = "w-56 shrink-0 sm:w-64" }: NewsCard
         <h3 className="text-sm font-semibold leading-snug text-text-primary">{item.title}</h3>
         <p className="mt-1 text-xs text-text-secondary">{item.date}</p>
       </div>
-    </article>
+    </Link>
   );
 }
