@@ -21,8 +21,8 @@ export function ServiceDetails() {
   }
 
   const categoryLabel = categories.find((c) => c.id === app.category)?.label ?? app.category;
-  const from = (location.state as { from?: "Home" | "Explore" } | null)?.from ?? "Explore";
-  const fromPath = from === "Home" ? "/" : "/explore";
+  const from = (location.state as { from?: "Home" | "Explore" | "News" } | null)?.from ?? "Explore";
+  const fromPath = from === "Home" ? "/" : from === "News" ? "/news" : "/explore";
 
   return (
     <div className="flex flex-col pb-2">
