@@ -12,16 +12,18 @@ export function ServiceDetails() {
   const location = useLocation();
   const app = apps.find((a) => a.id === id);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const state = location.state as { from?: "Home" | "Explore" | "News"; subscribed?: boolean } | null;
   // TEMPORARY: local-only state, resets on refresh by design (no persistence yet).
   // Remove this note once MyPlans introduces persisted subscription state.
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  // `subscribed` can arrive pre-set via WideAppCard's own confirm flow, not just this page's.
+  const [isSubscribed, setIsSubscribed] = useState(() => Boolean(state?.subscribed));
 
   if (!app) {
     return <p className="pt-16 text-center text-sm text-text-secondary">App not found.</p>;
   }
 
   const categoryLabel = categories.find((c) => c.id === app.category)?.label ?? app.category;
-  const from = (location.state as { from?: "Home" | "Explore" | "News" } | null)?.from ?? "Explore";
+  const from = state?.from ?? "Explore";
   const fromPath = from === "Home" ? "/" : from === "News" ? "/news" : "/explore";
 
   return (
