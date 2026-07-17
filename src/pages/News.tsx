@@ -1,12 +1,47 @@
+import { useMemo, useState } from "react";
 import { news } from "@/data/news";
+import { categories } from "@/data/categories";
+import type { CategoryId } from "@/data/types";
 import { NewsCard } from "@/components/NewsCard";
+import { FilterChip } from "@/components/FilterChip";
 
 export function News() {
+  const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>([]);
+
+  const toggleCategory = (id: CategoryId) => {
+    setSelectedCategories((current) =>
+      current.includes(id) ? current.filter((c) => c !== id) : [...current, id],
+    );
+  };
+
+  const filteredNews = useMemo(
+    () =>
+      selectedCategories.length === 0
+        ? news
+        : news.filter((item) => selectedCategories.includes(item.category)),
+    [selectedCategories],
+  );
+
   return (
     <div className="flex flex-col gap-3 pt-2">
       <h2 className="text-lg font-semibold text-text-primary">News</h2>
+      <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1">
+        <FilterChip
+          label="All"
+          active={selectedCategories.length === 0}
+          onClick={() => setSelectedCategories([])}
+        />
+        {categories.map((category) => (
+          <FilterChip
+            key={category.id}
+            label={category.label}
+            active={selectedCategories.includes(category.id)}
+            onClick={() => toggleCategory(category.id)}
+          />
+        ))}
+      </div>
       <div className="flex flex-col gap-3">
-        {news.map((item) => (
+        {filteredNews.map((item) => (
           <NewsCard key={item.id} item={item} className="w-full" />
         ))}
       </div>
