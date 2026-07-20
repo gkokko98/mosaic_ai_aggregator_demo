@@ -8,7 +8,9 @@ mosAIc ("Your AI world, connected.") is a front-end-only React app — a marketp
 
 Design source of truth is a Figma file: <https://www.figma.com/design/3w572EHRed5lUQQHde0fAI/AI-Super-App--mosAIc->. Reference screenshots are saved in `design_screenshots/`.
 
-**Status: v1 is functionally complete.** All six screens — Home, Explore, News, News Article, Service Details, My Plans — are implemented and wired together end-to-end (see the Pages section below). What's *not* done yet is visual fidelity: colors, spacing, shadows, border radii, and alignment throughout were approximated by eye from static screenshots, not sampled from Figma's Inspect panel. That gap is the explicit target of the next phase.
+**Status: v1 is functionally complete.** All six screens — Home, Explore, News, News Article, Service Details, My Plans — are implemented and wired together end-to-end (see the Pages section below). What's *not* done yet is visual fidelity: colors, spacing, shadows, border radius, and alignment throughout were approximated by eye from static screenshots, not sampled from Figma's Inspect panel. That gap is the explicit target of the next phase.
+
+Additionally, what is not implemented yet, is the exact data that will be used in the final version of the MVP, for all the service categories, services/apps names, descriptions, images, icons, subscription & pricing schemes, pricings, dummy star ratings, news article images, titles, content, etc. These will be provided during the implementation of the second phase.
 
 ## Next phase: design-fidelity pass
 
@@ -40,7 +42,7 @@ A custom `scrollbar-none` utility is defined via `@utility` in the same file for
 
 **Routing** (`src/App.tsx`): a single `AppLayout` route wraps all pages with `<Outlet />`. Routes: `/` (Home), `/explore` (Explore), `/news` (News), `/news/:id` (NewsArticle), `/my-plans` (MyPlans), `/app/:id` (ServiceDetails). The layout (`src/components/layout/AppLayout.tsx`) constrains content to `max-w-md` (mobile-first — the Figma designs are phone-width; wider viewports get a centered mobile-width column rather than a distinct desktop layout) and conditionally hides the generic `Header` via `useMatch` for `/app/:id` and `/news/:id`, since both of those pages render their own hero image + back button instead.
 
-**Mock data** (`src/data/`): `types.ts` defines `App`, `NewsItem`, `Category`. `categories.ts` is the list of categories driving section rendering — `Home.tsx` maps over `categories` and filters `apps` by `category.id`, so **adding a new category to `categories.ts` automatically gets a new section on the homepage** as long as some app/news item references it. `apps.ts` and `news.ts` are the content arrays. `App` carries `description`, `ratingsCount`, `renewalDate` (a static display date for MyPlans' "Renews {date}"/"Expired {date}" line — not a real subscribe timestamp), and an optional `featured` flag; `NewsItem` carries `body: string[]` (paragraphs) for the full article text.
+**Mock data** (`src/data/`): `types.ts` defines `App`, `NewsItem`, `Category`. `categories.ts` is the list of categories driving section rendering — `Home.tsx` maps over `categories` and filters `apps` by `category.id`, so **adding a new category to `categories.ts` automatically gets a new section on the homepage** as long as some app/news item references it. `apps.ts` and `news.ts` are the content arrays. `App` carries `description`, `ratingsCount`, `renewalDate` (a static display date for MyPlans' "Renews {date}"/"Expired {date}" line — not a real subscribe timestamp), and an optional `featured` flag; `NewsItem` carries `body: string[]` (paragraphs) for the full article text. All these Mock data are not the final ones. The final ones that will be included in the final MVP version of the mosAIc app will be provided and implemented during phase 2.
 
 Since there are no real image assets yet, `App.image`/`NewsItem.image` hold CSS gradient strings (used directly as `backgroundImage` inline styles) rather than image URLs — swap these for real asset paths per-item as artwork becomes available, no component changes needed.
 
@@ -77,3 +79,64 @@ Path alias `@/*` → `src/*` (configured in both `vite.config.ts` and `tsconfig.
 - **`SubscriptionConfirmationModal.tsx`** — centered confirm dialog shared by `ServiceDetails` and `WideAppCard`'s Subscribe/Renew flows; a `mode: "subscribe" | "renew"` prop swaps the body copy.
 - **`icons.tsx`** — all inline SVG icons (search, user, star, the four nav icons, filter, chevron-left, close) as `SVGProps<SVGSVGElement>`-spreading components.
 - **`layout/Header.tsx`, `layout/BottomNav.tsx`, `layout/AppLayout.tsx`** — the shared mobile-width shell; `AppLayout` also decides when to hide `Header` (see Routing above).
+
+## Phase 2 - Overview
+
+## Phase 2 - Goals
+
+- Build the final MVP version of the mosAIc application.
+- The final version of the mosAIc MVP should be as close as possible to the Figma designs provided by the design team. Figma link here: <https://www.figma.com/design/3w572EHRed5lUQQHde0fAI/AI-Super-App--mosAIc-?m=auto&t=Z62lMO8g3t36JWr8-6>
+
+- The final mosAIc MVP should match the provided Figma designs in the following aspects
+  - UI & UX
+  - Colors, styles, font family, font sizes, shades, margins, paddings, spacing, etc.
+  - All the styling of the final mosAIc MVP should match the styling provided in the Figma design. In other words the phase two of the mosAIc MVP should mostly contain CSS changes that align and make the actual product identical with the Figma designs.
+
+## Phase 2 - Final Data
+
+**Final Service Categories:**
+
+1. AI Tools
+2. Health
+3. Education
+4. Kids
+5. Lifestyle
+
+**Final Services/Apps & Services/Apps <> Service Categories mapping**:
+
+1. PulseChat --> AI Tools
+2. AiPix --> AI Tools
+3. Ufitini --> Health
+4. MagicBite --> Health
+5. Uwisely --> Health
+6. MyGrowth --> Education
+7. Uplingo --> Education
+8. MyFinance --> Education
+9. AI Guru --> AI Tools
+10. Moonkid --> Kids
+11. Uwisely for Kids --> Kids
+12. FashionStar --> Lifestyle
+
+**Final news article:**
+
+We only need two articles which are the follwoing:
+
+Artilce one:
+
+1. Article title: "How AI makes nutrition science accessible"
+2. Article body: "For decades, precision nutrition was the preserve of elite athletes and patients with specific conditions (complex, expensive, and requiring a clinical setting). Artificial intelligence is changing that equation fundamentally.
+
+New apps now combine computer vision with vast nutritional databases to analyze a meal from a photograph in under three seconds. AI models trained on millions of labelled food images can distinguish between a latte and a flat white, between basmati and jasmine rice, details that matter when you are tracking micronutrients.
+
+The most advanced platforms build adaptive meal plans that respond to real feedback loops: if you consistently skip a recommended meal, the system adjusts rather than repeating the advice. The result is a shift from generic dietary guidelines to genuinely personal nutrition, at a fraction of the cost of professional consultation, and available to anyone with a smartphone."
+3. Article date: 12 Jun 2026
+
+Article two:
+
+1. Article title: "Once upon an algorithm: AI stories kids actually love"
+2. Article body: "The ritual of the bedtime story is one of childhood's most universal experiences, and one of the hardest for busy parents to sustain night after night. AI is stepping in not to replace that ritual but to make it infinitely sustainable.
+
+Platforms like Moonkid generate original stories on demand, calibrated to a child's age, interests, and even their emotional state that day. A child who had a difficult day at school can be offered a story about resilience; one who is excited about a birthday can hear a celebration tale.
+
+The technology pairs story generation with voice synthesis and ambient sound design, producing an experience that researchers describe as measurably calming, with children falling asleep faster than with recorded audiobooks."
+3. Article date: 10 Jun 2026
