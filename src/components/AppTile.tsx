@@ -2,12 +2,29 @@ import { Link } from "react-router-dom";
 import type { App } from "@/data/types";
 import { RatingStars } from "./RatingStars";
 
+/** Props for {@link AppTile}. */
 interface AppTileProps {
+  /** The app this tile represents — supplies its icon, name, price, and rating. */
   app: App;
+  /**
+   * The page this tile was rendered from. Threaded into the router's `state`
+   * so ServiceDetails' breadcrumb can link back to the correct origin page
+   * instead of always assuming one fixed parent screen.
+   */
   from: "Home" | "Explore";
+  /**
+   * Class override for the tile's sizing, so callers embedding it in a
+   * differently-shaped row/grid (Home's horizontal rows vs. Explore's grid)
+   * aren't stuck with one fixed width.
+   */
   className?: string;
 }
 
+/**
+ * Compact clickable tile used for an app in Home's category rows and
+ * Explore's grid. Purely presentational — all data comes from `app`, no
+ * local state or side effects — it just links through to the app's detail page.
+ */
 export function AppTile({ app, from, className = "w-36 shrink-0 sm:w-40" }: AppTileProps) {
   return (
     <Link

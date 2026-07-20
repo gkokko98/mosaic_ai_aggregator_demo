@@ -1,5 +1,14 @@
 import type { SVGProps } from "react";
 
+/**
+ * @fileoverview Centralizes all of the app's inline SVG icons in one file
+ * rather than pulling in an icon library dependency. Each icon is a trivial,
+ * near-identical component that just spreads incoming props (className,
+ * aria-label, etc.) onto a hand-drawn `<svg>` — documenting them individually
+ * would be pure noise, so this single file-level note covers the pattern for
+ * all of them below.
+ */
+
 export function SearchIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" {...props}>

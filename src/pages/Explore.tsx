@@ -6,7 +6,19 @@ import { AppTile } from "@/components/AppTile";
 import { ExploreFilterSheet } from "@/components/ExploreFilterSheet";
 import { FilterIcon } from "@/components/icons";
 
+/**
+ * The Explore route (`/explore`). Renders the full app catalog as a
+ * 2-column grid, filterable by category and price scheme via
+ * {@link ExploreFilterSheet}.
+ */
 export function Explore() {
+  // "Applied" filters (below) are what the grid actually reads. They're
+  // deliberately separate from ExploreFilterSheet's own internal draft
+  // state, which tracks whatever the user is currently toggling inside the
+  // still-open sheet. That split lets the user freely change selections
+  // without the grid re-filtering on every tap — the grid only updates once
+  // the user commits via Apply (see `onApply` below), and a Cancel/dismiss
+  // leaves the grid showing whatever was last applied.
   const [appliedCategories, setAppliedCategories] = useState<CategoryId[]>([]);
   const [appliedScheme, setAppliedScheme] = useState<PriceScheme | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -54,6 +66,8 @@ export function Explore() {
         selectedCategories={appliedCategories}
         priceScheme={appliedScheme}
         onApply={(categoriesFilter, scheme) => {
+          // Committing the sheet's draft selections into "applied" state is
+          // the one moment the grid's filters actually change.
           setAppliedCategories(categoriesFilter);
           setAppliedScheme(scheme);
           setSheetOpen(false);

@@ -5,15 +5,26 @@ import { CategoryBadge } from "@/components/CategoryBadge";
 import { WideAppCard } from "@/components/WideAppCard";
 import { ChevronLeftIcon } from "@/components/icons";
 
+/**
+ * The News Article route (`/news/:id`). Single-article view: hero image
+ * with back button and category badge, title/date, body paragraphs, and a
+ * "Recommended for you" list of apps sharing the article's category.
+ */
 export function NewsArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
   const item = news.find((n) => n.id === id);
 
+  // Same not-found fallback pattern as ServiceDetails.tsx: a static id that
+  // doesn't resolve (bad link, stale bookmark) renders a plain message
+  // instead of crashing on `item.title` etc.
   if (!item) {
     return <p className="pt-16 text-center text-sm text-text-secondary">Article not found.</p>;
   }
 
+  // Recommends apps from the same category as the article being read, so
+  // the suggestions stay relevant to what's currently on screen rather than
+  // being generic/unrelated picks.
   const recommendedApps = apps.filter((app) => app.category === item.category);
 
   return (
@@ -25,6 +36,12 @@ export function NewsArticle() {
         <button
           type="button"
           aria-label="Go back"
+          // Goes back through actual browser history rather than a fixed
+          // route: unlike ServiceDetails (which needs a specific known
+          // origin for its breadcrumb, since an app can be reached from
+          // several different pages), an article is reached from wherever
+          // the user happened to be, so returning to that exact spot is the
+          // more natural default here.
           onClick={() => navigate(-1)}
           className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-accent/80 text-app-bg backdrop-blur-sm"
         >

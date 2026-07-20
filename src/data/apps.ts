@@ -1,5 +1,12 @@
 import type { App } from "./types";
 
+/**
+ * @fileoverview This array (together with sibling mock data `news.ts` and
+ * `categories.ts`) IS the entire "backend" for mosAIc — there's no API layer,
+ * so every app tile, card, and detail page anywhere in the UI reads from
+ * this single source of truth.
+ */
+
 // `image` is a CSS gradient placeholder standing in for real Figma artwork/photography.
 export const apps: App[] = [
   {
@@ -128,4 +135,5 @@ export const apps: App[] = [
   },
 ];
 
+/** Derived rather than a separate array: Home's carousel only needs this featured subset, and deriving it keeps the two lists from drifting out of sync. */
 export const featuredApps = apps.filter((app) => app.featured);

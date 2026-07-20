@@ -5,9 +5,16 @@ import type { CategoryId } from "@/data/types";
 import { NewsCard } from "@/components/NewsCard";
 import { FilterChip } from "@/components/FilterChip";
 
+/**
+ * The News route (`/news`). The full article list, filterable by category
+ * via a row of toggleable {@link FilterChip}s (multi-select, in addition to
+ * an "All" chip that clears the selection).
+ */
 export function News() {
   const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>([]);
 
+  // Toggles a single category in/out of the selection array: drop it if
+  // already selected, otherwise append it.
   const toggleCategory = (id: CategoryId) => {
     setSelectedCategories((current) =>
       current.includes(id) ? current.filter((c) => c !== id) : [...current, id],

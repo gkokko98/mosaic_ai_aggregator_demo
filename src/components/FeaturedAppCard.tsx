@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import type { App } from "@/data/types";
 import { CategoryBadge } from "./CategoryBadge";
 
+/**
+ * Large hero-style card for Home's featured-apps snap carousel. Unlike the
+ * compact `AppTile`, this always links back with `from: "Home"` — it only
+ * ever appears on Home, so there's no need for a caller-supplied `from` prop
+ * the way `AppTile` needs one to support multiple origin pages.
+ *
+ * @param app The featured app to showcase — supplies its background image,
+ * category badge, name, and tagline.
+ */
 export function FeaturedAppCard({ app }: { app: App }) {
   return (
     <Link

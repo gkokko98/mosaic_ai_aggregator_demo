@@ -1,5 +1,11 @@
 import type { NewsItem } from "./types";
 
+/**
+ * @fileoverview Mock article data — sibling to `apps.ts` in the same
+ * no-backend mock layer. Powers the News list, Home's News preview row, and
+ * each article's `/news/:id` page directly; there is no API layer behind it.
+ */
+
 // `image` is a CSS gradient placeholder standing in for real Figma artwork/photography.
 export const news: NewsItem[] = [
   {

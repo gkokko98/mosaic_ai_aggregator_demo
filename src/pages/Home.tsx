@@ -7,6 +7,20 @@ import { NewsCard } from "@/components/NewsCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { useCarouselIndex } from "@/hooks/useCarouselIndex";
 
+/**
+ * The Home route (`/`). Landing screen made of three horizontal-scroll
+ * sections stacked vertically: a snap-carousel of featured apps (with dot
+ * indicators driven by {@link useCarouselIndex}), a News preview row, and one
+ * row per category.
+ *
+ * The category rows are entirely data-driven: this component maps over
+ * `categories` (from `src/data/categories.ts`) and filters `apps` by
+ * `category.id`, skipping any category with zero matching apps. That means
+ * adding a new category to `categories.ts` automatically creates a new
+ * homepage section with no changes needed here, as long as some app
+ * references it — see CLAUDE.md's "Mock data" section for this intentional
+ * data-driven design.
+ */
 export function Home() {
   const { containerRef, index, onScroll } = useCarouselIndex(featuredApps.length);
 
@@ -47,6 +61,10 @@ export function Home() {
 
       {categories.map((category) => {
         const categoryApps = apps.filter((app) => app.category === category.id);
+        // Skip categories with no matching apps rather than rendering an
+        // empty section header — this is what makes new categories "just
+        // appear" once content references them, and disappear again if that
+        // content is removed.
         if (categoryApps.length === 0) return null;
 
         return (

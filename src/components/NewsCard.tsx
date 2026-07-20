@@ -2,11 +2,23 @@ import { Link } from "react-router-dom";
 import type { NewsItem } from "@/data/types";
 import { CategoryBadge } from "./CategoryBadge";
 
+/** Props for {@link NewsCard}. */
 interface NewsCardProps {
+  /** The article this card teases — supplies its hero image, category, title, and date. */
   item: NewsItem;
+  /**
+   * Class override for the card's sizing, so callers embedding it in
+   * differently-shaped layouts (Home's horizontal preview row vs. the full
+   * News list) aren't stuck with one fixed width.
+   */
   className?: string;
 }
 
+/**
+ * Clickable teaser card for a news article, reused on both Home's News
+ * preview row and the full `News` list. Purely presentational — all data
+ * comes from `item` — it just links through to the article's full page.
+ */
 export function NewsCard({ item, className = "w-56 shrink-0 sm:w-64" }: NewsCardProps) {
   return (
     <Link

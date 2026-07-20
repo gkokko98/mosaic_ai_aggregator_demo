@@ -4,17 +4,26 @@ import type { CategoryId } from "@/data/types";
 import type { PriceScheme } from "@/lib/priceScheme";
 import { FilterChip } from "./FilterChip";
 
+// Fixed list of price-scheme filter options, in display order. Kept as a
+// module-level const (rather than deriving it from data) since these three
+// suffixes are the only ones `getPriceScheme()` ever parses out of `App.price`.
 const PRICE_SCHEMES: { id: PriceScheme; label: string }[] = [
   { id: "day", label: "Daily" },
   { id: "week", label: "Weekly" },
   { id: "month", label: "Monthly" },
 ];
 
+/** Props for {@link ExploreFilterSheet}. */
 interface ExploreFilterSheetProps {
+  /** Whether the sheet is shown. */
   open: boolean;
+  /** Currently-applied category filters (empty = no category filter), owned by Explore.tsx. */
   selectedCategories: CategoryId[];
+  /** Currently-applied price-scheme filter, or null for "any". */
   priceScheme: PriceScheme | null;
+  /** Called with the draft selections when the user taps "Apply filters". */
   onApply: (categories: CategoryId[], priceScheme: PriceScheme | null) => void;
+  /** Called on any dismissal path (backdrop click) without applying the draft. */
   onClose: () => void;
 }
 
@@ -25,9 +34,15 @@ export function ExploreFilterSheet({
   onApply,
   onClose,
 }: ExploreFilterSheetProps) {
+  // Local "draft" state lets the user toggle chips freely while the sheet is
+  // open without affecting Explore's actual applied filters until they tap
+  // "Apply filters" — closing via the backdrop discards the draft.
   const [draftCategories, setDraftCategories] = useState(selectedCategories);
   const [draftScheme, setDraftScheme] = useState(priceScheme);
 
+  // Resyncs the draft from the applied props every time the sheet opens, so
+  // reopening it always shows the last-APPLIED filters rather than whatever
+  // draft was left over from a previous open-then-cancel.
   useEffect(() => {
     if (open) {
       setDraftCategories(selectedCategories);
@@ -37,12 +52,15 @@ export function ExploreFilterSheet({
 
   if (!open) return null;
 
+  // Toggles one category chip in/out of the draft selection.
   const toggleCategory = (id: CategoryId) => {
     setDraftCategories((current) =>
       current.includes(id) ? current.filter((c) => c !== id) : [...current, id],
     );
   };
 
+  // Resets both draft filters to their "no filter" state; the user still
+  // has to tap "Apply filters" to commit this back to Explore.
   const clearAll = () => {
     setDraftCategories([]);
     setDraftScheme(null);

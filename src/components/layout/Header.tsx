@@ -1,5 +1,13 @@
 import { SearchIcon, UserIcon } from "../icons";
 
+/**
+ * Generic top header with the mosAIc wordmark and Search/Profile icon
+ * buttons, shown on every page except ServiceDetails and NewsArticle (which
+ * render their own hero + back button instead — see AppLayout).
+ *
+ * Current gap: the Search and Profile buttons below are non-functional —
+ * neither has an onClick handler yet, so they're purely decorative for now.
+ */
 export function Header() {
   return (
     <header className="flex items-center justify-between px-4 pb-6 pt-6">

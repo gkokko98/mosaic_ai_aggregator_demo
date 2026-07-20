@@ -2,22 +2,41 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { apps } from "@/data/apps";
 import { getSubscriptionStatus, useSubscriptions } from "@/context/useSubscriptions";
+// OUTLINE_PILL_CLASSNAME is exported from WideAppCard.tsx precisely so its
+// "Launch" pill style can be reused here for "Explore more" without
+// duplicating the class string — see the matching note in WideAppCard.tsx.
 import { OUTLINE_PILL_CLASSNAME, WideAppCard } from "@/components/WideAppCard";
 
+/** The subscription-status tabs MyPlans can filter its list by. */
 type PlanFilter = "all" | "active" | "expired";
 
+/** Drives the filter tab row; kept as data so the tabs render from one list
+ * rather than three hand-written buttons. */
 const FILTERS: { id: PlanFilter; label: string }[] = [
   { id: "all", label: "All" },
   { id: "active", label: "Active" },
   { id: "expired", label: "Expired" },
 ];
 
+/**
+ * Per-filter empty-state copy. A single generic message ("nothing here")
+ * would read oddly for every tab, so each filter gets wording specific to
+ * what's actually missing — no subscriptions at all vs. no active plans vs.
+ * no expired plans.
+ */
 const EMPTY_MESSAGES: Record<PlanFilter, string> = {
   all: "You haven't subscribed to any services yet.",
   active: "No active plans.",
   expired: "No expired plans.",
 };
 
+/**
+ * The My Plans route (`/my-plans`). The subscription hub: the user's
+ * subscribed apps filterable by All/Active/Expired, plus a "Recommended for
+ * you" list of apps they haven't subscribed to yet (shown only under "All",
+ * since it's meant as a discovery nudge, not something to sift through per
+ * status tab).
+ */
 export function MyPlans() {
   const { isSubscribed } = useSubscriptions();
   const [filter, setFilter] = useState<PlanFilter>("all");
