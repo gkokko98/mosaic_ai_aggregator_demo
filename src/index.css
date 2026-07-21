@@ -19,6 +19,7 @@
   --color-text-secondary: #8ea0b3;
   --color-nav-bg: #0b232c;
   --color-nav-border: #1e3846;
+  --color-black: #0f1015;
 }
 
 body {
@@ -38,4 +39,8 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@utility bg-app-gradient {
+  background: radial-gradient(75.96% 98.3% at 100% 0%, var(--color-nav-border) 0%, var(--color-black) 100%);
 }

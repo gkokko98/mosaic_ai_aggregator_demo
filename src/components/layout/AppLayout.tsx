@@ -16,7 +16,7 @@ export function AppLayout() {
   const isNewsArticle = useMatch("/news/:id");
 
   return (
-    <div className="mx-auto flex min-h-svh max-w-md flex-col bg-app-bg">
+    <div className="mx-auto flex min-h-svh max-w-md flex-col bg-app-gradient">
       {!isServiceDetails && !isNewsArticle && <Header />}
       <main className="flex-1 overflow-y-auto px-4 pb-6">
         <Outlet />
