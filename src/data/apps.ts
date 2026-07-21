@@ -1,4 +1,9 @@
 import type { App } from "./types";
+import pulsechatImage from "@/assets/apps/pulsechat.png";
+import mygrowthImage from "@/assets/apps/mygrowth.jpg";
+import aipixImage from "@/assets/apps/aipix.jpg";
+import uplingoImage from "@/assets/apps/uplingo.jpg";
+import magicbiteImage from "@/assets/apps/magicbite.png";
 
 /**
  * @fileoverview This array (together with sibling mock data `news.ts` and
@@ -7,14 +12,16 @@ import type { App } from "./types";
  * this single source of truth.
  */
 
-// `image` is a CSS gradient placeholder standing in for real Figma artwork/photography.
+// `image` is a CSS value used directly as `backgroundImage` — either a
+// gradient placeholder standing in for real Figma artwork, or (for the 5
+// featured carousel apps) a `url(...)` reference to a real downloaded asset.
 export const apps: App[] = [
   {
     id: "pulsechat",
     name: "PulseChat",
     tagline: "Chat, create, and build with leading AI",
     category: "ai-tools",
-    image: "linear-gradient(135deg, #ff6ec7 0%, #7873f5 50%, #4ade80 100%)",
+    image: `url(${pulsechatImage})`,
     icon: "P",
     iconBg: "#f5c518",
     price: "€0.99/day",
@@ -24,6 +31,70 @@ export const apps: App[] = [
       "Chat with advanced AI models, generate content, and build custom workflows — all from one sleek assistant that adapts to how you work and create every day.",
     featured: true,
     renewalDate: "21 Jul 2026",
+  },
+  {
+    id: "mygrowth",
+    name: "MyGrowth",
+    tagline: "Daily AI lessons for a better you",
+    category: "education",
+    image: `url(${mygrowthImage})`,
+    icon: "☄",
+    iconBg: "#f8fafc",
+    price: "€1.99/week",
+    rating: 5,
+    ratingsCount: 621,
+    description:
+      "Personal growth powered by AI coaching — set goals, track habits, and get daily guidance tailored to your mindset, routines, and long-term ambitions.",
+    featured: true,
+    renewalDate: "24 Jul 2026",
+  },
+  {
+    id: "aipix",
+    name: "AIPix",
+    tagline: "Your AI expert across any field",
+    category: "ai-tools",
+    image: `url(${aipixImage})`,
+    icon: "✦",
+    iconBg: "linear-gradient(135deg, #a855f7, #ec4899)",
+    price: "€1.49/day",
+    rating: 3.5,
+    ratingsCount: 134,
+    description:
+      "Turn simple prompts into stunning AI-generated art, illustrations, and visuals in seconds — perfect for social posts, moodboards, and creative projects.",
+    featured: true,
+    renewalDate: "19 Jul 2026",
+  },
+  {
+    id: "uplingo",
+    name: "Uplingo",
+    tagline: "Master any language with AI conversation",
+    category: "education",
+    image: `url(${uplingoImage})`,
+    icon: "✈",
+    iconBg: "#0ea5e9",
+    price: "€2.99/week",
+    rating: 4,
+    ratingsCount: 275,
+    description:
+      "Master new skills in bite-sized lessons, powered by adaptive AI that adjusts pace and difficulty to how you learn best, one quick session at a time.",
+    featured: true,
+    renewalDate: "25 Jul 2026",
+  },
+  {
+    id: "magicbite",
+    name: "MagicBite",
+    tagline: "Scan your food, own your nutrition",
+    category: "health",
+    image: `url(${magicbiteImage})`,
+    icon: "M",
+    iconBg: "#4d7c0f",
+    price: "€4.99/month",
+    rating: 4.5,
+    ratingsCount: 567,
+    description:
+      "Scan any meal with your camera and get instant nutrition breakdowns, smart recipe swaps, and personalised tips to help you eat better every single day.",
+    featured: true,
+    renewalDate: "18 Jun 2026",
   },
   {
     id: "ufitini",
@@ -38,7 +109,6 @@ export const apps: App[] = [
     ratingsCount: 224,
     description:
       "Your AI-powered fitness companion. Choose your trainer, follow personalised workout plans, fuel your body with healthy recipes, and find your zen with yoga all in one app.",
-    featured: true,
     renewalDate: "24 Jul 2026",
   },
   {
@@ -54,39 +124,7 @@ export const apps: App[] = [
     ratingsCount: 389,
     description:
       "Gentle AI-narrated bedtime stories crafted for little dreamers, with calming soundscapes and nightly routines that help kids drift off happy and relaxed.",
-    featured: true,
     renewalDate: "23 Jul 2026",
-  },
-  {
-    id: "magicbite",
-    name: "MagicBite",
-    tagline: "Scan your food, own your nutrition",
-    category: "health",
-    image: "linear-gradient(135deg, #365314 0%, #1a2e05 100%)",
-    icon: "M",
-    iconBg: "#4d7c0f",
-    price: "€4.99/month",
-    rating: 4.5,
-    ratingsCount: 567,
-    description:
-      "Scan any meal with your camera and get instant nutrition breakdowns, smart recipe swaps, and personalised tips to help you eat better every single day.",
-    featured: true,
-    renewalDate: "18 Jun 2026",
-  },
-  {
-    id: "aipix",
-    name: "AIPix",
-    tagline: "Turn your ideas into stunning visuals",
-    category: "ai-tools",
-    image: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-    icon: "✦",
-    iconBg: "linear-gradient(135deg, #a855f7, #ec4899)",
-    price: "€1.49/day",
-    rating: 3.5,
-    ratingsCount: 134,
-    description:
-      "Turn simple prompts into stunning AI-generated art, illustrations, and visuals in seconds — perfect for social posts, moodboards, and creative projects.",
-    renewalDate: "19 Jul 2026",
   },
   {
     id: "uwisely",
@@ -102,36 +140,6 @@ export const apps: App[] = [
     description:
       "Learn any language the smart way with adaptive AI lessons, real conversation practice, and bite-sized daily drills that fit whenever you have a spare minute.",
     renewalDate: "10 Aug 2026",
-  },
-  {
-    id: "mygrowth",
-    name: "MyGrowth",
-    tagline: "Personal growth, powered by AI coaching",
-    category: "education",
-    image: "linear-gradient(135deg, #facc15 0%, #4ade80 100%)",
-    icon: "☄",
-    iconBg: "#f8fafc",
-    price: "€1.99/week",
-    rating: 5,
-    ratingsCount: 621,
-    description:
-      "Personal growth powered by AI coaching — set goals, track habits, and get daily guidance tailored to your mindset, routines, and long-term ambitions.",
-    renewalDate: "24 Jul 2026",
-  },
-  {
-    id: "uplingo",
-    name: "Uplingo",
-    tagline: "Master new skills in bite-sized lessons",
-    category: "education",
-    image: "linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%)",
-    icon: "✈",
-    iconBg: "#0ea5e9",
-    price: "€2.99/week",
-    rating: 4,
-    ratingsCount: 275,
-    description:
-      "Master new skills in bite-sized lessons, powered by adaptive AI that adjusts pace and difficulty to how you learn best, one quick session at a time.",
-    renewalDate: "25 Jul 2026",
   },
 ];
 
