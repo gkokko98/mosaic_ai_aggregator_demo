@@ -31,11 +31,11 @@ export function Home() {
         <div
           ref={containerRef}
           onScroll={onScroll}
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto scrollbar-none pb-1"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scrollbar-none pb-1"
         >
-          {featuredApps.map((app) => (
+          {featuredApps.map((app, i) => (
             <div key={app.id} className="snap-start">
-              <FeaturedAppCard app={app} />
+              <FeaturedAppCard app={app} isActive={i === index} />
             </div>
           ))}
         </div>
