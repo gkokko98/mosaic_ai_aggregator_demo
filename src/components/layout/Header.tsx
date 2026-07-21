@@ -1,4 +1,14 @@
-import { SearchIcon, UserIcon } from "../icons";
+import logo from "@/assets/mosaic-logo.svg";
+import searchIcon from "@/assets/icons/search.svg";
+import profileIcon from "@/assets/icons/profile.svg";
+
+// The exported icon assets bake in the full pill (background, border, drop
+// shadow) at 58x58 with a 9px transparent shadow bleed around a 40x40 visual
+// pill, so each button is laid out as a 40x40 box with the image absolutely
+// centered and overflowing — this keeps flex `gap` measuring from the visual
+// pill edge, matching Figma spacing, instead of the asset's padded bounds.
+const ICON_BUTTON_CLASSNAME = "relative h-10 w-10 shrink-0";
+const ICON_IMAGE_CLASSNAME = "absolute -inset-[9px] h-[58px] w-[58px]";
 
 /**
  * Generic top header with the mosAIc wordmark and Search/Profile icon
@@ -10,29 +20,17 @@ import { SearchIcon, UserIcon } from "../icons";
  */
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-4 pb-6 pt-6">
-      <div>
-        <h1 className="text-2xl font-bold text-text-primary">
-          mos<span className="text-accent">Ai</span>c
-        </h1>
-        <p className="text-sm text-accent">Your AI world, connected.</p>
+    <header className="flex items-center gap-3 px-6 py-[27px]">
+      <div className="flex flex-1 flex-col gap-1">
+        <img src={logo} alt="mosAIc" className="h-[21px] w-[108px]" />
+        <p className="text-sm text-accent-dark">Your AI world, connected.</p>
       </div>
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          aria-label="Search"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-text-primary"
-        >
-          <SearchIcon className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Profile"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-text-primary"
-        >
-          <UserIcon className="h-5 w-5" />
-        </button>
-      </div>
+      <button type="button" aria-label="Search" className={ICON_BUTTON_CLASSNAME}>
+        <img src={searchIcon} alt="" className={ICON_IMAGE_CLASSNAME} />
+      </button>
+      <button type="button" aria-label="Profile" className={ICON_BUTTON_CLASSNAME}>
+        <img src={profileIcon} alt="" className={ICON_IMAGE_CLASSNAME} />
+      </button>
     </header>
   );
 }
