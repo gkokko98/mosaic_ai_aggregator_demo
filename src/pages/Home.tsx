@@ -5,6 +5,7 @@ import { FeaturedAppCard } from "@/components/FeaturedAppCard";
 import { AppTile } from "@/components/AppTile";
 import { NewsCard } from "@/components/NewsCard";
 import { SectionHeader } from "@/components/SectionHeader";
+import { CarouselIndicator } from "@/components/CarouselIndicator";
 import { useCarouselIndex } from "@/hooks/useCarouselIndex";
 
 /**
@@ -38,15 +39,8 @@ export function Home() {
             </div>
           ))}
         </div>
-        <div className="mt-3 flex justify-center gap-1.5">
-          {featuredApps.map((app, i) => (
-            <span
-              key={app.id}
-              className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-5 bg-accent" : "w-1.5 bg-white/20"
-              }`}
-            />
-          ))}
+        <div className="mt-3">
+          <CarouselIndicator count={featuredApps.length} activeIndex={index} />
         </div>
       </section>
 
