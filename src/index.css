@@ -17,6 +17,8 @@
   --color-star: #f5a623;
   --color-text-primary: #f5f7fa;
   --color-text-secondary: #8ea0b3;
+  --color-nav-bg: #0b232c;
+  --color-nav-border: #1e3846;
 }
 
 body {

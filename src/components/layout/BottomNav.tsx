@@ -1,5 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { ExploreIcon, HomeIcon, NewsIcon, PlansIcon } from "../icons";
+import homeActive from "@/assets/icons/nav/home-active.svg";
+import homeInactive from "@/assets/icons/nav/home-inactive.svg";
+import exploreActive from "@/assets/icons/nav/explore-active.svg";
+import exploreInactive from "@/assets/icons/nav/explore-inactive.svg";
+import newsActive from "@/assets/icons/nav/news-active.svg";
+import newsInactive from "@/assets/icons/nav/news-inactive.svg";
+import myPlansActive from "@/assets/icons/nav/my-plans-active.svg";
+import myPlansInactive from "@/assets/icons/nav/my-plans-inactive.svg";
 
 /**
  * The four bottom tabs, in display order. Kept as a data array (rather than
@@ -9,29 +16,36 @@ import { ExploreIcon, HomeIcon, NewsIcon, PlansIcon } from "../icons";
  * would treat Home as "active" while on Explore/News/My Plans too.
  */
 const items = [
-  { to: "/", label: "Home", icon: HomeIcon, end: true },
-  { to: "/explore", label: "Explore", icon: ExploreIcon, end: false },
-  { to: "/news", label: "News", icon: NewsIcon, end: false },
-  { to: "/my-plans", label: "My Plans", icon: PlansIcon, end: false },
+  { to: "/", label: "Home", activeIcon: homeActive, inactiveIcon: homeInactive, end: true },
+  { to: "/explore", label: "Explore", activeIcon: exploreActive, inactiveIcon: exploreInactive, end: false },
+  { to: "/news", label: "News", activeIcon: newsActive, inactiveIcon: newsInactive, end: false },
+  { to: "/my-plans", label: "My Plans", activeIcon: myPlansActive, inactiveIcon: myPlansInactive, end: false },
 ];
 
 /** Sticky bottom tab bar (Home/Explore/News/My Plans), rendered on every page via AppLayout. */
 export function BottomNav() {
   return (
-    <nav className="sticky bottom-0 z-10 flex justify-around border-t border-white/5 bg-app-bg/95 px-2 py-2 backdrop-blur">
-      {items.map(({ to, label, icon: Icon, end }) => (
+    <nav className="sticky bottom-0 z-10 flex justify-between rounded-t-2xl border-t border-nav-border bg-nav-bg px-6 shadow-[0px_0px_10px_3px_rgba(15,16,21,0.6)]">
+      {items.map(({ to, label, activeIcon, inactiveIcon, end }) => (
         <NavLink
           key={to}
           to={to}
           end={end}
           className={({ isActive }) =>
-            `flex flex-col items-center gap-1 rounded-xl px-3 py-1.5 text-xs font-medium ${
-              isActive ? "text-accent" : "text-text-secondary"
+            `relative flex h-[72px] w-14 flex-col items-center justify-center gap-1 text-xs ${
+              isActive ? "text-accent" : "text-text-primary"
             }`
           }
         >
-          <Icon className="h-5 w-5" />
-          {label}
+          {({ isActive }) => (
+            <>
+              <img src={isActive ? activeIcon : inactiveIcon} alt="" className="h-6 w-6" />
+              <span className={isActive ? "font-bold" : "font-normal"}>{label}</span>
+              {isActive && (
+                <span className="absolute bottom-0 left-1/2 h-1 w-8 -translate-x-1/2 bg-accent" />
+              )}
+            </>
+          )}
         </NavLink>
       ))}
     </nav>
