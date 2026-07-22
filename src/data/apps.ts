@@ -4,6 +4,14 @@ import mygrowthImage from "@/assets/apps/mygrowth.jpg";
 import aipixImage from "@/assets/apps/aipix.jpg";
 import uplingoImage from "@/assets/apps/uplingo.jpg";
 import magicbiteImage from "@/assets/apps/magicbite.png";
+import pulsechatLogo from "@/assets/icons/apps/pulsechat.svg";
+import mygrowthLogo from "@/assets/icons/apps/mygrowth.svg";
+import aipixLogo from "@/assets/icons/apps/aipix.svg";
+import uplingoLogo from "@/assets/icons/apps/uplingo.svg";
+import magicbiteLogo from "@/assets/icons/apps/magicbite.svg";
+import ufitiniLogo from "@/assets/icons/apps/ufitini.svg";
+import moonkidLogo from "@/assets/icons/apps/moonkid.svg";
+import uwiselyLogo from "@/assets/icons/apps/uwisely.svg";
 
 /**
  * @fileoverview This array (together with sibling mock data `news.ts` and
@@ -24,6 +32,7 @@ export const apps: App[] = [
     image: `url(${pulsechatImage})`,
     icon: "P",
     iconBg: "#f5c518",
+    logo: pulsechatLogo,
     price: "€0.99/day",
     rating: 5,
     ratingsCount: 1042,
@@ -40,6 +49,7 @@ export const apps: App[] = [
     image: `url(${mygrowthImage})`,
     icon: "☄",
     iconBg: "#f8fafc",
+    logo: mygrowthLogo,
     price: "€1.99/week",
     rating: 5,
     ratingsCount: 621,
@@ -56,6 +66,7 @@ export const apps: App[] = [
     image: `url(${aipixImage})`,
     icon: "✦",
     iconBg: "linear-gradient(135deg, #a855f7, #ec4899)",
+    logo: aipixLogo,
     price: "€1.49/day",
     rating: 3.5,
     ratingsCount: 134,
@@ -72,6 +83,7 @@ export const apps: App[] = [
     image: `url(${uplingoImage})`,
     icon: "✈",
     iconBg: "#0ea5e9",
+    logo: uplingoLogo,
     price: "€2.99/week",
     rating: 4,
     ratingsCount: 275,
@@ -88,6 +100,7 @@ export const apps: App[] = [
     image: `url(${magicbiteImage})`,
     icon: "M",
     iconBg: "#4d7c0f",
+    logo: magicbiteLogo,
     price: "€4.99/month",
     rating: 4.5,
     ratingsCount: 567,
@@ -104,6 +117,7 @@ export const apps: App[] = [
     image: "linear-gradient(135deg, #7f1d1d 0%, #78350f 100%)",
     icon: "U",
     iconBg: "linear-gradient(135deg, #f472b6, #60a5fa)",
+    logo: ufitiniLogo,
     price: "€2.99/week",
     rating: 4,
     ratingsCount: 224,
@@ -119,6 +133,7 @@ export const apps: App[] = [
     image: "linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%)",
     icon: "M",
     iconBg: "#38bdf8",
+    logo: moonkidLogo,
     price: "€1.49/week",
     rating: 5,
     ratingsCount: 389,
@@ -134,6 +149,7 @@ export const apps: App[] = [
     image: "linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)",
     icon: "●",
     iconBg: "#2563eb",
+    logo: uwiselyLogo,
     price: "€3.99/month",
     rating: 3.5,
     ratingsCount: 98,
