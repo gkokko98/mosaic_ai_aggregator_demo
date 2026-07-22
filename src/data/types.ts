@@ -31,6 +31,8 @@ export interface App {
   icon: string;
   /** Background color/gradient for the icon badge — separate from `icon` so the glyph and its backdrop can be styled/swapped independently. */
   iconBg: string;
+  /** Real per-app logo image (Figma-sourced), used by AppTile's icon badge. */
+  logo: string;
   /** Formatted price string including its billing cadence suffix (e.g. "€0.99/day") — parsed by `getPriceScheme` rather than storing cadence as a separate field. */
   price: string;
   /** Average star rating (supports halves) driving `RatingStars`. */

@@ -4,6 +4,8 @@ import { StarIcon } from "./icons";
 interface RatingStarsProps {
   /** The rating value out of 5 — may be fractional (e.g. 3.5) to render a partial star. */
   rating: number;
+  /** Icon size variant. "sm" (12px, default) is used by WideAppCard; "md" (16px, no gap) matches AppTile's Figma spec. */
+  size?: "sm" | "md";
 }
 
 /**
@@ -14,26 +16,28 @@ interface RatingStarsProps {
  * shows as three full stars plus one star exactly half-colored, driven
  * purely by CSS width rather than swapping in different icon variants.
  */
-export function RatingStars({ rating }: RatingStarsProps) {
+export function RatingStars({ rating, size = "sm" }: RatingStarsProps) {
   // Clamp to 0–5 then convert to a 0–100% width: this percentage is what
   // gets applied to the foreground row's clipping container below, so a
   // rating of 3.5 produces a 70%-wide window that visually cuts the 4th
   // star in half rather than rendering a distinct half-star glyph.
   const percent = Math.max(0, Math.min(100, (rating / 5) * 100));
+  const iconClass = size === "md" ? "h-4 w-4" : "h-3 w-3";
+  const gapClass = size === "md" ? "gap-0" : "gap-0.5";
 
   return (
     <div className="relative inline-flex" aria-label={`${rating} out of 5 stars`}>
-      <div className="flex gap-0.5 text-white/15">
+      <div className={`flex ${gapClass} text-white/15`}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <StarIcon key={i} className="h-3 w-3" />
+          <StarIcon key={i} className={iconClass} />
         ))}
       </div>
       <div
-        className="absolute inset-0 flex gap-0.5 overflow-hidden text-star"
+        className={`absolute inset-0 flex ${gapClass} overflow-hidden text-star`}
         style={{ width: `${percent}%` }}
       >
         {Array.from({ length: 5 }).map((_, i) => (
-          <StarIcon key={i} className="h-3 w-3 shrink-0" />
+          <StarIcon key={i} className={`${iconClass} shrink-0`} />
         ))}
       </div>
     </div>
