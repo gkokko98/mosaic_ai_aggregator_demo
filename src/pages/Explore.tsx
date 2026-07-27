@@ -33,7 +33,7 @@ export function Explore() {
   }, [appliedCategories, appliedScheme]);
 
   return (
-    <div className="flex flex-col gap-4 pt-2">
+    <div className="-mx-4 flex flex-col gap-4 px-6 pt-2">
       <div className="flex items-end justify-between">
         <div>
           <h2 className="text-lg font-semibold text-text-primary">Explore</h2>
@@ -54,9 +54,9 @@ export function Explore() {
           No apps match your filters.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="flex flex-wrap justify-center gap-4">
           {filteredApps.map((app) => (
-            <AppTile key={app.id} app={app} className="w-full aspect-square" from="Explore" />
+            <AppTile key={app.id} app={app} from="Explore" />
           ))}
         </div>
       )}
