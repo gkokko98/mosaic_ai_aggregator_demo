@@ -34,19 +34,22 @@ export function Explore() {
 
   return (
     <div className="-mx-4 flex flex-col gap-4 px-6 pt-2">
-      <div className="flex items-end justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-text-primary">Explore</h2>
-          <span className="mt-1.5 block h-1 w-8 rounded-full bg-accent" />
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <h2 className="text-[22px] font-bold text-text-primary">Explore</h2>
+          <button
+            type="button"
+            className="flex items-center gap-1.5 text-sm font-medium text-accent"
+            onClick={() => setSheetOpen(true)}
+          >
+            <FilterIcon className="h-4 w-4" />
+            Filters
+          </button>
         </div>
-        <button
-          type="button"
-          className="flex items-center gap-1.5 text-sm font-medium text-accent"
-          onClick={() => setSheetOpen(true)}
-        >
-          <FilterIcon className="h-4 w-4" />
-          Filters
-        </button>
+        <div className="flex items-center gap-2">
+          <span className="h-1 w-8 bg-accent" />
+          <span className="h-1 w-1 bg-accent" />
+        </div>
       </div>
 
       {filteredApps.length === 0 ? (

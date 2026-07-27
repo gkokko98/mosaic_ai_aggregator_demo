@@ -74,53 +74,59 @@ export function ExploreFilterSheet({
         className="absolute inset-0 bg-black/60"
         onClick={onClose}
       />
-      <div className="relative mx-auto w-full max-w-md rounded-t-3xl bg-surface-alt p-5 pb-6">
-        <span className="mx-auto mb-4 block h-1 w-10 rounded-full bg-white/20" />
+      <div className="relative mx-auto flex w-full max-w-md flex-col gap-8 rounded-t-2xl border border-nav-border bg-app-gradient px-6 pt-3 pb-8 shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]">
+        <div className="flex flex-col gap-5">
+          <span className="mx-auto block h-1 w-11 rounded-full bg-accent/20" />
 
-        <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-text-primary">Filters</h2>
-          <button type="button" className="text-sm font-medium text-accent" onClick={clearAll}>
-            Clear all
-          </button>
-        </div>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <h2 className="text-base font-bold text-white">Filters</h2>
+                <button type="button" className="text-sm font-bold text-accent-dark" onClick={clearAll}>
+                  Clear all
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="h-1 w-8 bg-accent" />
+                <span className="h-1 w-1 bg-accent" />
+              </div>
+            </div>
 
-        <div className="mb-5">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-secondary">
-            Category
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <FilterChip label="All" active={draftCategories.length === 0} onClick={() => setDraftCategories([])} />
-            {categories.map((category) => (
-              <FilterChip
-                key={category.id}
-                label={category.label}
-                active={draftCategories.includes(category.id)}
-                onClick={() => toggleCategory(category.id)}
-              />
-            ))}
-          </div>
-        </div>
+            <div className="flex flex-col gap-3">
+              <p className="text-sm text-white/80">Category</p>
+              <div className="flex flex-wrap gap-2">
+                <FilterChip label="All" active={draftCategories.length === 0} onClick={() => setDraftCategories([])} />
+                {categories.map((category) => (
+                  <FilterChip
+                    key={category.id}
+                    label={category.label}
+                    active={draftCategories.includes(category.id)}
+                    onClick={() => toggleCategory(category.id)}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="mb-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-secondary">
-            Price scheme
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <FilterChip label="Any" active={draftScheme === null} onClick={() => setDraftScheme(null)} />
-            {PRICE_SCHEMES.map((scheme) => (
-              <FilterChip
-                key={scheme.id}
-                label={scheme.label}
-                active={draftScheme === scheme.id}
-                onClick={() => setDraftScheme(scheme.id)}
-              />
-            ))}
+            <div className="flex flex-col gap-3">
+              <p className="text-sm text-white/80">Price scheme</p>
+              <div className="flex flex-wrap gap-2">
+                <FilterChip label="Any" active={draftScheme === null} onClick={() => setDraftScheme(null)} />
+                {PRICE_SCHEMES.map((scheme) => (
+                  <FilterChip
+                    key={scheme.id}
+                    label={scheme.label}
+                    active={draftScheme === scheme.id}
+                    onClick={() => setDraftScheme(scheme.id)}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <button
           type="button"
-          className="w-full rounded-full bg-accent py-3 text-sm font-semibold text-app-bg"
+          className="self-center rounded-full border border-accent-dark bg-accent-dark/60 px-6 py-3 text-base font-bold uppercase text-white shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]"
           onClick={() => onApply(draftCategories, draftScheme)}
         >
           Apply filters

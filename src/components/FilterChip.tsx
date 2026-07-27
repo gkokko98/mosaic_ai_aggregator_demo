@@ -20,8 +20,10 @@ export function FilterChip({ label, active, onClick }: FilterChipProps) {
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
-        active ? "bg-accent text-app-bg" : "bg-surface text-text-secondary"
+      className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] backdrop-blur-sm transition-colors ${
+        active
+          ? "border-accent-dark bg-accent-dark/60 text-white"
+          : "border-accent-dark/40 bg-nav-border text-accent-dark/60"
       }`}
     >
       {label}
