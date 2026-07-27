@@ -13,26 +13,25 @@ interface AppTileProps {
    */
   from: "Home" | "Explore";
   /**
-   * Class override for the tile's sizing, so callers embedding it in a
-   * differently-shaped row/grid (Home's horizontal rows vs. Explore's grid)
-   * aren't stuck with one fixed width. `aspect-square` is baked into the
-   * default so the tile always renders as Figma's square card regardless of
-   * the width a caller gives it.
+   * Class override for the tile's sizing, for callers that embed it in a
+   * differently-shaped row (Home's horizontal scroll vs. Explore's wrapping
+   * flex row). `aspect-square` is baked into the default so the tile always
+   * renders as Figma's fixed 148px square card regardless of context.
    */
   className?: string;
 }
 
 /**
  * Compact clickable tile used for an app in Home's category rows and
- * Explore's grid. Purely presentational — all data comes from `app`, no
+ * Explore's app list. Purely presentational — all data comes from `app`, no
  * local state or side effects — it just links through to the app's detail page.
  */
-export function AppTile({ app, from, className = "w-36 aspect-square shrink-0 sm:w-40" }: AppTileProps) {
+export function AppTile({ app, from, className = "w-[148px] aspect-square shrink-0" }: AppTileProps) {
   return (
     <Link
       to={`/app/${app.id}`}
       state={{ from }}
-      className={`flex flex-col items-center justify-between rounded-2xl border border-nav-border bg-nav-bg p-4 drop-shadow-[0_0_5px_rgba(15,16,21,0.6)] ${className}`}
+      className={`flex flex-col items-center justify-between rounded-2xl border border-nav-border bg-nav-bg p-4 shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] ${className}`}
     >
       <img src={app.logo} alt="" className="h-10 w-10 object-contain" />
       <div className="flex w-full flex-col items-start gap-1 text-center">
