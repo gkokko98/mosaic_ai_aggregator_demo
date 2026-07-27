@@ -4,6 +4,10 @@ import mygrowthImage from "@/assets/apps/mygrowth.jpg";
 import aipixImage from "@/assets/apps/aipix.jpg";
 import uplingoImage from "@/assets/apps/uplingo.jpg";
 import magicbiteImage from "@/assets/apps/magicbite.png";
+import ufitiniHeroImage from "@/assets/apps/ufitini-hero.jpg";
+import ufitiniScreenshot1 from "@/assets/apps/ufitini-screenshot-1.jpg";
+import ufitiniScreenshot2 from "@/assets/apps/ufitini-screenshot-2.jpg";
+import ufitiniScreenshot3 from "@/assets/apps/ufitini-screenshot-3.jpg";
 import pulsechatLogo from "@/assets/icons/apps/pulsechat.svg";
 import mygrowthLogo from "@/assets/icons/apps/mygrowth.svg";
 import aipixLogo from "@/assets/icons/apps/aipix.svg";
@@ -114,7 +118,7 @@ export const apps: App[] = [
     name: "Ufitini",
     tagline: "Where fitness meets AI intelligence",
     category: "health",
-    image: "linear-gradient(135deg, #7f1d1d 0%, #78350f 100%)",
+    image: `url(${ufitiniHeroImage})`,
     icon: "U",
     iconBg: "linear-gradient(135deg, #f472b6, #60a5fa)",
     logo: ufitiniLogo,
@@ -124,6 +128,7 @@ export const apps: App[] = [
     description:
       "Your AI-powered fitness companion. Choose your trainer, follow personalised workout plans, fuel your body with healthy recipes, and find your zen with yoga all in one app.",
     renewalDate: "24 Jul 2026",
+    screenshots: [ufitiniScreenshot1, ufitiniScreenshot2, ufitiniScreenshot3],
   },
   {
     id: "moonkid",

@@ -43,6 +43,8 @@ export interface App {
   description: string;
   /** Optional: only set on the subset of apps Home's featured carousel should surface, so most apps simply omit it rather than every app needing an explicit `featured: false`. */
   featured?: boolean;
+  /** Optional: real screenshot assets for ServiceDetails' image carousel. Omitted apps fall back to placeholder boxes until their artwork is provided. */
+  screenshots?: string[];
   // Static display date for MyPlans' "Renews {date}" / "Expired {date}" line —
   // not a real subscribe timestamp, since there's no backend to record one.
   renewalDate: string;

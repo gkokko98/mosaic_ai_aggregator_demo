@@ -26,7 +26,8 @@ const FROM_PATHS: Record<From, string> = {
 /**
  * The App/Service Details route (`/app/:id`). Shows one app's full detail
  * view — hero, breadcrumb, rating, a Subscribe/Renew/Launch CTA, description,
- * and a screenshots placeholder — and drives the subscribe/renew confirmation
+ * and a screenshots carousel (real images where `app.screenshots` is set,
+ * placeholder boxes otherwise) — and drives the subscribe/renew confirmation
  * flow shared with {@link WideAppCard}.
  */
 export function ServiceDetails() {
@@ -61,21 +62,24 @@ export function ServiceDetails() {
 
   return (
     <div className="flex flex-col pb-2">
-      <div className="relative -mx-4 h-64 shrink-0 bg-surface">
+      <div
+        className="relative -mx-4 h-60 shrink-0 bg-surface"
+        style={{ backgroundImage: app.image, backgroundSize: "cover", backgroundPosition: "center" }}
+      >
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate(-1)}
-          className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-accent/80 text-app-bg backdrop-blur-sm"
+          className="absolute left-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border border-accent-dark bg-accent-dark/60 text-white shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] backdrop-blur-sm"
         >
-          <ChevronLeftIcon className="h-5 w-5" />
+          <ChevronLeftIcon className="h-6 w-6" />
         </button>
-        <span className="absolute bottom-4 right-4 rounded-full bg-accent px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-app-bg">
+        <span className="absolute bottom-6 right-6 rounded-full border border-accent-dark bg-accent-dark/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] backdrop-blur-sm">
           {app.price}
         </span>
       </div>
 
-      <nav aria-label="Breadcrumb" className="mt-4 flex items-center gap-1.5 text-xs text-text-secondary">
+      <nav aria-label="Breadcrumb" className="mt-4 flex items-center justify-center text-xs text-text-secondary">
         <Link to={fromPath} className="hover:text-text-primary">
           {from}
         </Link>
@@ -86,11 +90,14 @@ export function ServiceDetails() {
       </nav>
 
       <div className="mt-3">
-        <h1 className="text-2xl font-bold text-text-primary">{app.name}</h1>
-        <span className="mt-1.5 block h-1 w-8 rounded-full bg-accent" />
+        <h1 className="text-center text-2xl font-bold text-text-primary">{app.name}</h1>
+        <span className="mt-2 flex items-center justify-center gap-2">
+          <span className="h-1 w-8 rounded-full bg-accent" />
+          <span className="h-1 w-1 rounded-full bg-accent" />
+        </span>
       </div>
 
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-3 flex items-center justify-center gap-1">
         <RatingStars rating={app.rating} />
         <span className="text-xs text-text-secondary">{app.ratingsCount} ratings</span>
       </div>
@@ -102,23 +109,28 @@ export function ServiceDetails() {
           // subscribe/renew commitment, not for re-entering an app you already pay for.
           if (status !== "launch") setIsModalOpen(true);
         }}
-        className="mt-5 w-full rounded-full bg-accent py-3.5 text-sm font-bold uppercase tracking-wide text-app-bg"
+        className="mt-5 w-full rounded-full border border-accent-dark bg-accent-dark/60 py-3 text-base font-bold uppercase tracking-wide text-white"
       >
         {status === "subscribe" ? "Subscribe" : status === "renew" ? "Renew" : "Launch"}
       </button>
 
-      <p className="mt-5 text-center text-sm text-text-secondary">{app.description}</p>
+      <p className="mt-2 text-center text-sm text-text-secondary">{app.description}</p>
 
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold text-text-primary">Screenshots</h2>
-        <span className="mt-1.5 block h-1 w-8 rounded-full bg-accent" />
-        <div className="mt-3 flex gap-3 overflow-x-auto scrollbar-none pb-1">
-          {/* Placeholder boxes standing in for real screenshot images — no
-              screenshot assets exist yet (see CLAUDE.md's design-fidelity gaps). */}
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="h-40 w-28 shrink-0 rounded-2xl bg-surface" />
-          ))}
-        </div>
+      <div className="mt-6 flex gap-4 overflow-x-auto scrollbar-none pb-1">
+        {app.screenshots ? (
+          app.screenshots.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${app.name} screenshot ${i + 1}`}
+              className="h-[320px] w-[180px] shrink-0 rounded-2xl border border-nav-border object-cover shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]"
+            />
+          ))
+        ) : (
+          // Placeholder boxes standing in for real screenshot images — no
+          // screenshot assets exist yet for this app (see CLAUDE.md's design-fidelity gaps).
+          [0, 1, 2].map((i) => <div key={i} className="h-[320px] w-[180px] shrink-0 rounded-2xl bg-surface" />)
+        )}
       </div>
 
       <SubscriptionConfirmationModal
