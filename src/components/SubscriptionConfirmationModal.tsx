@@ -45,26 +45,26 @@ export function SubscriptionConfirmationModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
       <button
         type="button"
         aria-label="Close"
         className="absolute inset-0 bg-black/60"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-sm rounded-3xl border border-accent/40 bg-surface-alt p-6 text-center">
+      <div className="relative w-full rounded-2xl border border-nav-border bg-app-gradient px-6 pb-8 pt-10 text-center shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]">
         <button
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="absolute right-4 top-4 text-text-secondary hover:text-text-primary"
+          className="absolute right-3 top-3 text-accent-dark/60 hover:text-accent-dark"
         >
-          <CloseIcon className="h-5 w-5" />
+          <CloseIcon className="h-6 w-6" />
         </button>
 
-        <h2 className="text-xl font-bold text-text-primary">Confirm your plan</h2>
+        <h2 className="text-2xl font-bold text-text-primary">Confirm your plan</h2>
 
-        <p className="mt-4 text-sm text-text-secondary">
+        <p className="mt-4 text-sm text-white/80">
           {mode === "renew" ? (
             <>
               You're about to renew your plan for <strong className="text-accent">{appName}</strong> for{" "}
@@ -78,14 +78,14 @@ export function SubscriptionConfirmationModal({
           )}
         </p>
 
-        <p className="mt-3 text-xs text-text-secondary">
+        <p className="mt-3 text-sm text-white/80">
           You can stop future renewals via the service portal.
         </p>
 
         <button
           type="button"
           onClick={onConfirm}
-          className="mt-6 rounded-full bg-accent px-8 py-3 text-sm font-bold uppercase tracking-wide text-app-bg"
+          className="mt-8 rounded-full border border-accent-dark bg-accent-dark/60 px-6 py-3 text-base font-bold uppercase tracking-wide text-white shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]"
         >
           Confirm
         </button>
