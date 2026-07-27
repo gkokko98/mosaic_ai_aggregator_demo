@@ -16,7 +16,7 @@ export function CategoryBadge({ category }: { category: CategoryId }) {
   const label = categories.find((c) => c.id === category)?.label ?? category;
 
   return (
-    <span className="inline-flex items-center rounded-full bg-accent-muted px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-accent backdrop-blur-sm">
+    <span className="inline-flex items-center rounded-full border border-[#069fbd] bg-[rgba(6,159,189,0.6)] px-3 py-1 text-[11px] font-semibold uppercase text-white shadow-[0_0_10px_0_rgba(15,16,21,0.6)] backdrop-blur-[2px]">
       {label}
     </span>
   );
