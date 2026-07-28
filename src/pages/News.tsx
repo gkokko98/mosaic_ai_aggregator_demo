@@ -30,8 +30,14 @@ export function News() {
   );
 
   return (
-    <div className="flex flex-col gap-3 pt-2">
-      <h2 className="text-lg font-semibold text-text-primary">News</h2>
+    <div className="-mx-4 flex flex-col gap-4 px-6 pt-2">
+      <div className="flex flex-col items-center gap-2">
+        <h2 className="text-[22px] font-bold text-text-primary">News</h2>
+        <div className="flex items-center gap-2">
+          <span className="h-1 w-8 bg-accent" />
+          <span className="h-1 w-1 bg-accent" />
+        </div>
+      </div>
       <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1">
         <FilterChip
           label="All"
