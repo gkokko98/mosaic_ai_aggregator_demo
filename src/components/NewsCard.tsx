@@ -23,13 +23,13 @@ export function NewsCard({ item, className = "w-56 shrink-0 sm:w-64" }: NewsCard
   return (
     <Link
       to={`/news/${item.id}`}
-      className={`relative flex h-40 flex-col justify-end overflow-hidden rounded-2xl drop-shadow-[0_0_5px_rgba(15,16,21,0.6)] ${className}`}
+      className={`relative flex aspect-[312/188] flex-col justify-end overflow-hidden rounded-2xl shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] ${className}`}
       style={{ backgroundImage: item.image, backgroundSize: "cover", backgroundPosition: "center" }}
     >
       <div className="absolute left-2.5 top-2.5">
         <CategoryBadge category={item.category} />
       </div>
-      <div className="flex flex-col gap-2 rounded-b-2xl border-t border-[rgba(30,56,70,0.4)] bg-[rgba(11,35,44,0.4)] px-2.5 pb-3 pt-2 backdrop-blur-[2px]">
+      <div className="flex flex-col gap-2 rounded-b-2xl border-t border-[rgba(30,56,70,0.4)] bg-[rgba(11,35,44,0.4)] px-2.5 pb-3 pt-2 backdrop-blur-[4px]">
         <h3 className="text-base font-bold leading-snug text-white [text-shadow:0_0_10px_rgba(15,16,21,0.6)]">
           {item.title}
         </h3>
