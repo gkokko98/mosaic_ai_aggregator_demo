@@ -58,11 +58,13 @@ export function WideAppCard({ app, from, className = "" }: WideAppCardProps) {
       : "launch";
 
   return (
-    <div className={`flex flex-col gap-3 rounded-2xl bg-surface p-4 ${className}`}>
+    <div
+      className={`flex flex-col gap-3 rounded-2xl border border-nav-border bg-nav-bg p-4 shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] ${className}`}
+    >
       <Link to={`/app/${app.id}`} state={{ from }} className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-base font-bold text-app-bg"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-base font-bold text-app-bg"
             style={{ background: app.iconBg }}
           >
             {app.icon}
