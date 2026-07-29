@@ -8,20 +8,30 @@ mosAIc ("Your AI world, connected.") is a front-end-only React app — a marketp
 
 Design source of truth is a Figma file: <https://www.figma.com/design/3w572EHRed5lUQQHde0fAI/AI-Super-App--mosAIc->. Reference screenshots are saved in `design_screenshots/`.
 
-**Status: v1 is functionally complete.** All six screens — Home, Explore, News, News Article, Service Details, My Plans — are implemented and wired together end-to-end (see the Pages section below). What's *not* done yet is visual fidelity: colors, spacing, shadows, border radius, and alignment throughout were approximated by eye from static screenshots, not sampled from Figma's Inspect panel. That gap is the explicit target of the next phase.
+**Status: Phase 2 (design-fidelity + final data) is in progress.** v1 (all six screens wired end-to-end) shipped 2026-07-17. Since then, a Figma-fidelity styling pass has matched spacing, shadow, border-radius, typography, and per-component colors against Figma on: Home (header, `SectionHeader`, carousel indicator, bottom nav, background gradient, `FeaturedAppCard`, `AppTile`), Explore (grid, filter sheet, heading), News (heading, `NewsCard`), `NewsArticle`, `ServiceDetails`, and `SubscriptionConfirmationModal`. Real per-app SVG logos and news hero images have replaced most CSS-gradient placeholders. Final news data (both articles) is fully in place; final categories and apps data is partially in place. See "Remaining Phase 2 work" below for exactly what's left.
 
-Additionally, what is not implemented yet, is the exact data that will be used in the final version of the MVP, for all the service categories, services/apps names, descriptions, images, icons, subscription & pricing schemes, pricings, dummy star ratings, news article images, titles, content, etc. These will be provided during the implementation of the second phase.
+## Remaining Phase 2 work
 
-## Next phase: design-fidelity pass
+This is meant to remain a **styling + data pass, not a refactor** — component structure, data flow, and behavior (routing, the subscription context, filtering logic, etc.) should stay as-is unless a visual requirement genuinely can't be met without changing them.
 
-The plan is to use a Figma MCP integration to pull exact per-component specs (spacing, color, shadow, typography) directly from the Figma file above, verify them against the current implementation one screen/component at a time, and correct the Tailwind classes and `src/index.css` tokens accordingly. This is meant to be a **styling pass, not a refactor** — component structure, data flow, and behavior (routing, the subscription context, filtering logic, etc.) should stay as-is unless a visual requirement genuinely can't be met without changing them.
+**Data:**
 
-Known visual gaps to start from:
+- `src/data/categories.ts` has 4 of the 5 final categories — **Lifestyle is missing**.
+- `src/data/apps.ts` has 8 of the 12 final apps (missing MyFinance, AI Guru, Uwisely for Kids, FashionStar). SVG logos for all four already exist under `src/assets/icons/apps/` but aren't wired in yet. No app currently belongs to Lifestyle since the category doesn't exist yet.
+- `src/data/news.ts` is final — both articles match the copy/dates in this file exactly.
 
-- All color tokens in `src/index.css` are approximated from screenshots (already flagged there) — spacing, shadow, and border-radius values hardcoded throughout components are equally approximate and haven't been cross-checked against Figma at all.
-- `App.image`/`NewsItem.image` are CSS gradient strings standing in for real artwork — no real image assets exist yet.
-- `ServiceDetails.tsx`'s "Screenshots" gallery is three bare `bg-surface` placeholder boxes, no real images.
-- `SectionHeader.tsx`'s "View all" button always renders, even when no `onViewAll` handler is passed — a minor existing inconsistency worth resolving in this pass.
+**Images:**
+
+- Moonkid and Uwisely (`src/data/apps.ts`) still use CSS gradient placeholders instead of real artwork, unlike the other apps.
+- `ServiceDetails.tsx`'s screenshots gallery only has real images wired for Ufitini (via `app.screenshots`); every other app still falls back to 3 placeholder boxes pending assets.
+
+**Styling:**
+
+- `src/index.css`'s `@theme` color tokens are still flagged as "approximated from Figma screenshots" — not yet confirmed against Figma's actual variables/Inspect panel, despite the rest of the fidelity pass being underway.
+
+**Known inconsistency, not yet resolved:**
+
+- `SectionHeader.tsx`'s "View all" button still always renders regardless of whether `onViewAll` is passed.
 
 ## Commands
 
