@@ -13,12 +13,12 @@ import { SubscriptionConfirmationModal } from "./SubscriptionConfirmationModal";
  * pill, even though that link has nothing to do with subscription status.
  */
 export const OUTLINE_PILL_CLASSNAME =
-  "block w-full rounded-full border border-accent py-3 text-center text-sm font-bold uppercase tracking-wide text-accent";
+  "block w-full rounded-full border border-accent-dark/40 bg-nav-border py-2 px-6 text-center text-sm font-bold text-accent shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]";
 
 // Solid pill style for the "Subscribe now"/"Renew now" states. Not exported —
 // unlike OUTLINE_PILL_CLASSNAME, nothing outside this component needs it.
 const SOLID_PILL_CLASSNAME =
-  "w-full rounded-full bg-accent py-3 text-center text-sm font-bold uppercase tracking-wide text-app-bg";
+  "w-full rounded-full border border-accent-dark bg-accent-dark/60 py-2 px-6 text-center text-sm font-bold text-white shadow-[0_0_10px_3px_rgba(15,16,21,0.6)]";
 
 /** Props for {@link WideAppCard}. */
 interface WideAppCardProps {
@@ -59,19 +59,14 @@ export function WideAppCard({ app, from, className = "" }: WideAppCardProps) {
 
   return (
     <div
-      className={`flex flex-col gap-3 rounded-2xl border border-nav-border bg-nav-bg p-4 shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] ${className}`}
+      className={`flex flex-col gap-2 rounded-2xl border border-nav-border bg-nav-bg p-4 shadow-[0_0_10px_3px_rgba(15,16,21,0.6)] ${className}`}
     >
-      <Link to={`/app/${app.id}`} state={{ from }} className="flex flex-col gap-3">
+      <Link to={`/app/${app.id}`} state={{ from }} className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
-          <div
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-base font-bold text-app-bg"
-            style={{ background: app.iconBg }}
-          >
-            {app.icon}
-          </div>
+          <img src={app.logo} alt="" className="h-10 w-10 shrink-0 object-contain" />
           <div>
-            <p className="text-sm font-semibold text-text-primary">{app.name}</p>
-            <p className="text-xs text-accent">
+            <p className="text-base font-bold text-white">{app.name}</p>
+            <p className="text-xs text-accent-dark">
               {categoryLabel} &bull; {app.price}
             </p>
           </div>
@@ -83,7 +78,7 @@ export function WideAppCard({ app, from, className = "" }: WideAppCardProps) {
             <span className="text-xs text-text-secondary">{app.ratingsCount} ratings</span>
           </div>
         ) : (
-          <p className="text-xs text-text-secondary">
+          <p className="text-xs text-white/80">
             {status === "renew" ? "Expired" : "Renews"} {app.renewalDate}
           </p>
         )}
